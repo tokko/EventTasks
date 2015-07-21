@@ -5,11 +5,9 @@ apply plugin: 'com.github.triplet.play'
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-/*
     lintOptions {
         abortOnError false
     }
-*/
     signingConfigs {
         release {
             storeFile file("keystore.jks")
