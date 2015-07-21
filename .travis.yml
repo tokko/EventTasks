@@ -25,5 +25,6 @@ script:
 after_success:
   - git config user.email $GIT_EMAIL
   - git config user.name $GIT_NAME
+  - git add --all
   - git commit -a -m "Committed by Travis-CI for updated versioncodes"
-  - git push https://github.com/tokko/EventTasks.git master
+  - git push https://$GIT_CREDS@github.com/tokko/EventTasks.git HEAD:master
