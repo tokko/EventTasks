@@ -16,7 +16,7 @@ before_deploy:
 - ls -R
 script:
 - "./gradlew check assembleRelease"
-- if [ "$TRAVIS_BRANCH" = "alpha" ]; then gradlew publishRelease; fi
+- if [ "$TRAVIS_BRANCH" = "alpha" ]; then ./gradlew publishRelease; fi
 after_success:
 - git config user.email $GIT_EMAIL
 - git config user.name $GIT_NAME
