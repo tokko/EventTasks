@@ -1,9 +1,8 @@
 package com.eventtasks.tokko.eventtasks;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-
 import android.view.MenuItem;
 
 
@@ -16,7 +15,7 @@ import android.view.MenuItem;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link EventDetailFragment}.
  */
-public class EventDetailActivity extends ActionBarActivity {
+public class EventDetailActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,7 @@ public class EventDetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_event_detail);
 
         // Show the Up button in the action bar.
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -43,7 +42,7 @@ public class EventDetailActivity extends ActionBarActivity {
                     getIntent().getStringExtra(EventDetailFragment.ARG_ITEM_ID));
             EventDetailFragment fragment = new EventDetailFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.event_detail_container, fragment)
                     .commit();
         }

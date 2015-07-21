@@ -1,8 +1,8 @@
 package com.eventtasks.tokko.eventtasks;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
 
 /**
@@ -21,7 +21,7 @@ import android.support.v4.app.FragmentActivity;
  * {@link EventListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class EventListActivity extends FragmentActivity
+public class EventListActivity extends Activity
         implements EventListFragment.Callbacks {
 
     /**
@@ -44,7 +44,7 @@ public class EventListActivity extends FragmentActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            ((EventListFragment) getSupportFragmentManager()
+            ((EventListFragment) getFragmentManager()
                     .findFragmentById(R.id.event_list))
                     .setActivateOnItemClick(true);
         }
@@ -66,7 +66,7 @@ public class EventListActivity extends FragmentActivity
             arguments.putString(EventDetailFragment.ARG_ITEM_ID, id);
             EventDetailFragment fragment = new EventDetailFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .replace(R.id.event_detail_container, fragment)
                     .commit();
 
