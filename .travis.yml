@@ -26,4 +26,4 @@ after_success:
   - git config user.email $GIT_EMAIL
   - git config user.name $GIT_NAME
   - git commit -a -m "Committed by Travis-CI for updated versioncodes"
-  - git push https://github.com/tokko/EventTasks.git master
+  - git push "https://$408729d2df3e954a7c29124cb8fbf1aa982f4e8f@github.com/tokko/EventTasks.git" master
