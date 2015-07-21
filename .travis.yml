@@ -18,10 +18,10 @@ before_deploy:
 
 script:
   - ./gradlew check assembleRelease
-  - if [$TRAVIS_BRANCH == 'alpha']; then gradlew publishRelease; fi
+  - if [ $TRAVIS_BRANCH = 'alpha' ]; gradlew publishRelease; fi
 
 after_success:
   - git config user.email $GIT_EMAIL
   - git config user.name $GIT_NAME
   - git commit -a -m "Committed by Travis-CI for updated versioncodes"
-  - if [$TRAVIS_BRANCH == 'alpha');  then git push https://$GIT_CREDS@github.com/tokko/EventTasks.git HEAD:master; fi
+  - if [ $TRAVIS_BRANCH = 'alpha' ];  git push https://$GIT_CREDS@github.com/tokko/EventTasks.git HEAD:master; fi
