@@ -1,39 +1,67 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.github.triplet.play'
 
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
+/*
     lintOptions {
         abortOnError false
     }
-
+*/
     signingConfigs {
         release {
-            storeFile rootProject.file("keystore.jks")
+            storeFile file("keystore.jks")
             storePassword System.getenv("KEYSTORE_PASS")
             keyAlias System.getenv("ALIAS_NAME")
             keyPassword System.getenv("ALIAS_PASS")
         }
     }
+    /*
+    def Properties versionProps = new Properties()
+    def versionPropsFile = file('version.properties')
+    if(versionPropsFile.exists())
+        versionProps.load(new FileInputStream(versionPropsFile))
+    def code = (versionProps['VERSION_CODE'] ?: "5").toInteger() + 1
+    def buildNumber = (versionProps['BUILD_NUMBER'] ?: "0").toInteger() + 1
+    versionProps['VERSION_CODE'] = code.toString()
+    versionProps['BUILD_NUMBER'] = code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+    */
     defaultConfig {
         applicationId "com.eventtasks.tokko.eventtasks"
+        multiDexEnabled = true
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "1.0.2."
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            zipAlignEnabled true
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            minifyEnabled false
+            zipAlignEnabled false
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+play {
+    serviceAccountEmail = '92588905880-fdolvkj29p3l637u5fgaa3jke0vksd17@developer.gserviceaccount.com'
+    pk12File = file('key.p12')
+ //   uploadImages = true
 }
 
 retrolambda {
@@ -44,7 +72,7 @@ retrolambda {
 dependencies {
     compile 'joda-time:joda-time:2.3'
     testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.0-rc2'
+    testCompile 'org.robolectric:robolectric:3.0'
     testCompile "org.mockito:mockito-core:1.10.0"
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
