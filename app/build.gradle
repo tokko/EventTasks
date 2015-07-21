@@ -23,7 +23,7 @@ android {
     def code = (versionProps['VERSION_CODE'] ?: "6").toInteger() + 1
     def buildNumber = (versionProps['BUILD_NUMBER'] ?: "0").toInteger() + 1
     versionProps['VERSION_CODE'] = code.toString()
-    versionProps['BUILD_NUMBER'] = code.toString()
+    versionProps['BUILD_NUMBER'] = buildNumber.toString()
     versionProps.store(versionPropsFile.newWriter(), null)
     defaultConfig {
         applicationId "com.eventtasks.tokko.eventtasks"
