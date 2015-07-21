@@ -13,3 +13,7 @@ before_script:
 
 script:
   - ./gradlew check assembleRelease publishRelease
+
+after_success:
+  - git commit -a -m "Committed by Travis-CI for updated versioncodes"
+  - git push origin master

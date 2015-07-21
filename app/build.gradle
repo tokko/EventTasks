@@ -16,7 +16,6 @@ android {
             keyPassword System.getenv("ALIAS_PASS")
         }
     }
-    /*
     def Properties versionProps = new Properties()
     def versionPropsFile = file('version.properties')
     if(versionPropsFile.exists())
@@ -26,14 +25,13 @@ android {
     versionProps['VERSION_CODE'] = code.toString()
     versionProps['BUILD_NUMBER'] = code.toString()
     versionProps.store(versionPropsFile.newWriter(), null)
-    */
     defaultConfig {
         applicationId "com.eventtasks.tokko.eventtasks"
         multiDexEnabled = true
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 5
-        versionName "1.0.2."
+        versionCode code
+        versionName "1.0."+buildNumber
     }
     buildTypes {
         release {
