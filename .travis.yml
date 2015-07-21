@@ -18,4 +18,4 @@ after_success:
   - git config user.email $GIT_EMAIL
   - git config user.name $GIT_NAME
   - git commit -a -m "Committed by Travis-CI for updated versioncodes"
-  - git push origin master
+  - git push https:github.com/tokko/EventTasks.git
