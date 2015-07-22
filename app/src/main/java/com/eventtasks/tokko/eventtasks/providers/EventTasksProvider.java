@@ -72,8 +72,16 @@ public class EventTasksProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        // TODO: Implement this to handle query requests from clients.
-        throw new UnsupportedOperationException("Not yet implemented");
+        SQLiteDatabase sdb = db.getReadableDatabase();
+        Cursor c;
+        switch (um.match(uri)) {
+            case KEY_EVENT:
+                c = sdb.query(TABLE_EVENT_NAME, projection, selection, selectionArgs, null, null, null, null);
+                c.setNotificationUri(getContext().getContentResolver(), uri);
+                return c;
+            default:
+                throw new IllegalStateException("Unknown URI");
+        }
     }
 
     @Override
