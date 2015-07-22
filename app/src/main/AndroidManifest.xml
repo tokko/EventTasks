@@ -24,6 +24,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".EventListActivity" />
         </activity>
+
+        <provider
+            android:name=".providers.EventTasksProvider"
+            android:authorities="com.eventtasks.tokko.eventtasks.providers"
+            android:enabled="true"
+            android:exported="true"></provider>
     </application>
 
 </manifest>

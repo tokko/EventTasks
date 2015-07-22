@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.github.triplet.play'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 22
@@ -68,10 +69,9 @@ retrolambda {
 dependencies {
 //    compile 'joda-time:joda-time:2.3'
     testCompile 'junit:junit:4.12'
-    /*
     testCompile 'org.robolectric:robolectric:3.0'
     testCompile "org.mockito:mockito-core:1.10.0"
-*/
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.annimon:stream:1.0.1'
     compile 'org.roboguice:roboguice:3.0.1'
