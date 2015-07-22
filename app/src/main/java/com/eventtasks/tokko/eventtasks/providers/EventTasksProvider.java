@@ -1,6 +1,7 @@
 package com.eventtasks.tokko.eventtasks.providers;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -49,8 +50,17 @@ public class EventTasksProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        // TODO: Implement this to handle requests to insert a new row.
-        throw new UnsupportedOperationException("Not yet implemented");
+        long id;
+        SQLiteDatabase sdb = db.getWritableDatabase();
+        switch (um.match(uri)) {
+            case KEY_EVENT:
+                id = sdb.insert(TABLE_EVENT_NAME, null, values);
+                if (id > -1)
+                    getContext().getContentResolver().notifyChange(uri, null);
+                return ContentUris.withAppendedId(uri, id);
+            default:
+                throw new IllegalStateException("Unknown URI");
+        }
     }
 
     @Override
