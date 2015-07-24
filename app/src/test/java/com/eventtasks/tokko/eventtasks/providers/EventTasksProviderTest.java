@@ -55,11 +55,14 @@ public class EventTasksProviderTest {
         String title = "title";
         c.put(EventTasksProvider.TITLE, title);
         Uri insert = mContentResolver.insert(EventTasksProvider.URI_EVENTS, c);
-        assertEquals(1, ContentUris.parseId(insert));
+        assertEquals(11, ContentUris.parseId(insert));
     }
 
     @Test
     public void events_Query() {
+        Cursor c = mContentResolver.query(EventTasksProvider.URI_EVENTS, null, null, null, null);
+        int prevsize = c.getCount();
+        c.close();
         ContentValues cv = new ContentValues();
         String title1 = "title1";
         String title2 = "title2";
@@ -73,15 +76,15 @@ public class EventTasksProviderTest {
         cv.put(EventTasksProvider.TITLE, title2);
         mContentResolver.insert(EventTasksProvider.URI_EVENTS, cv);
 
-        Cursor c = mContentResolver.query(EventTasksProvider.URI_EVENTS, null, null, null, null);
+        c = mContentResolver.query(EventTasksProvider.URI_EVENTS, null, null, null, null);
         assertNotNull(c);
-        assertEquals(titles.size(), c.getCount());
+        assertEquals(prevsize + titles.size(), c.getCount());
         assertEquals(2, c.getColumnCount());
         assertTrue(c.getColumnIndex(EventTasksProvider.ID) > -1);
         assertTrue(c.getColumnIndex(EventTasksProvider.TITLE) > -1);
 
         List<String> actual = Stream.of(iterableCursor(c)).map(c1 -> c1.getString(c1.getColumnIndex(EventTasksProvider.TITLE))).collect(Collectors.toList());
-        assertTrue(titles.containsAll(actual));
+        assertTrue(actual.containsAll(titles));
         c.close();
     }
 }
