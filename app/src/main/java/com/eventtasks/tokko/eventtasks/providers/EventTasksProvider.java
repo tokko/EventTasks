@@ -66,6 +66,13 @@ public class EventTasksProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         db = new Helper(getContext());
+        SQLiteDatabase sdb = db.getWritableDatabase();
+        sdb.delete(TABLE_EVENT_NAME, null, null);
+        for (int i = 0; i < 10; i++) {
+            ContentValues cv = new ContentValues();
+            cv.put(TITLE, "EVENT" + i);
+            sdb.insert(TABLE_EVENT_NAME, null, cv);
+        }
         return true;
     }
 
